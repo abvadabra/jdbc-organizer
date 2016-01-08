@@ -1,0 +1,19 @@
+apply plugin: 'java'
+
+archivesBaseName = "jdbc-organizer"
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+jar {
+    manifest{
+        attributes "Main-Class" : "ru.redenergy.organizer.Organizer"
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
+
+dependencies {
+    compile 'mysql:mysql-connector-java:5.1.6'
+}
